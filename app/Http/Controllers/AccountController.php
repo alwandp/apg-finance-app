@@ -60,7 +60,11 @@ class AccountController extends Controller
      */
     public function show(Account $account): Response
     {
-        $account->load(['children', 'parent']);
+        $account->load([
+            'children',
+            'parent',
+            'transactionDetails' => fn ($q) => $q->with('transaction')->latest('id'),
+        ]);
 
         return Inertia::render('accounts/show', [
             'account' => $account,

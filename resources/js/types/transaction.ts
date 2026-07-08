@@ -9,6 +9,7 @@ export type TransactionDetail = {
     type: TransactionEntryType;
     amount: string;
     account?: Account;
+    transaction?: Transaction;
 };
 
 export type Transaction = {

@@ -24,6 +24,7 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import AppLayout from '@/layouts/app-layout';
+import { formatCurrency } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Account, AccountType } from '@/types/account';
 
@@ -49,6 +50,7 @@ const getTypeBadgeStyles = (type: AccountType) => {
 };
 
 export default function AccountsShow({ account }: AccountsShowProps) {
+    const transactionDetails = account.transaction_details || account.transactionDetails || [];
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -252,16 +254,86 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                     Recent Transaction History
                                 </h2>
                             </div>
-                            <div className="rounded-lg border border-border/40 bg-slate-50 p-6 text-center dark:bg-slate-900">
-                                <p className="text-sm font-medium text-foreground">
-                                    No double-entry transactions recorded yet.
-                                </p>
-                                <p className="mt-1 text-xs text-muted-foreground">
-                                    Journal entries and full double-entry
-                                    transaction recording will be enabled across
-                                    the system in Phase 4.
-                                </p>
-                            </div>
+                            {transactionDetails.length === 0 ? (
+                                <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center dark:border-slate-800 dark:bg-slate-900/50">
+                                    <p className="text-sm font-medium text-foreground">
+                                        No double-entry transactions recorded yet.
+                                    </p>
+                                    <p className="mt-1 text-xs text-muted-foreground">
+                                        Any journal entries or double-entry transactions posted to this account will appear here.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
+                                    <table className="w-full border-collapse text-left text-sm">
+                                        <thead>
+                                            <tr className="border-b border-slate-200 bg-slate-50/75 font-sans text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-slate-800 dark:bg-slate-900/50">
+                                                <th className="p-3">Date</th>
+                                                <th className="p-3">Journal #</th>
+                                                <th className="p-3">Description</th>
+                                                <th className="p-3">Type</th>
+                                                <th className="p-3 text-right">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                                            {transactionDetails.map((detail) => {
+                                                const tx = detail.transaction;
+                                                const isDebit = detail.type === 'debit';
+
+                                                return (
+                                                    <tr
+                                                        key={detail.id}
+                                                        className="transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50"
+                                                    >
+                                                        <td className="p-3 font-mono text-xs whitespace-nowrap text-muted-foreground">
+                                                            {tx?.date
+                                                                ? new Date(tx.date).toLocaleDateString('id-ID', {
+                                                                    year: 'numeric',
+                                                                    month: 'short',
+                                                                    day: 'numeric',
+                                                                })
+                                                                : '—'}
+                                                        </td>
+                                                        <td className="p-3 font-mono text-xs font-medium text-foreground">
+                                                            {tx ? (
+                                                                <Link
+                                                                    href={`/transactions/${tx.id}`}
+                                                                    className="text-primary hover:underline"
+                                                                >
+                                                                    #{tx.id}
+                                                                </Link>
+                                                            ) : (
+                                                                '—'
+                                                            )}
+                                                        </td>
+                                                        <td className="p-3 font-medium text-foreground">
+                                                            {tx?.description || 'Transaction Entry'}
+                                                        </td>
+                                                        <td className="p-3">
+                                                            <span
+                                                                className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${isDebit
+                                                                        ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400'
+                                                                        : 'bg-rose-500/10 text-rose-600 dark:bg-rose-500/20 dark:text-rose-400'
+                                                                    }`}
+                                                            >
+                                                                {detail.type}
+                                                            </span>
+                                                        </td>
+                                                        <td
+                                                            className={`p-3 text-right font-mono font-semibold ${isDebit
+                                                                    ? 'text-emerald-600 dark:text-emerald-400'
+                                                                    : 'text-rose-600 dark:text-rose-400'
+                                                                }`}
+                                                        >
+                                                            {isDebit ? '+' : '-'}{formatCurrency(detail.amount)}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
                         </DashboardCard>
                     </div>
 

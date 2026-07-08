@@ -1,3 +1,5 @@
+import type { TransactionDetail } from './transaction';
+
 export type AccountType =
     'Asset' | 'Liability' | 'Equity' | 'Revenue' | 'Expense';
 
@@ -12,4 +14,6 @@ export type Account = {
     updated_at: string;
     children?: Account[];
     parent?: Account;
+    transaction_details?: TransactionDetail[];
+    transactionDetails?: TransactionDetail[];
 };

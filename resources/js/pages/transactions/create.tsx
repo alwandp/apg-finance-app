@@ -409,8 +409,8 @@ export default function TransactionsCreate({
                     <DashboardCard
 
                         className={`p-5 transition-colors duration-300 ${isBalanced
-                                ? 'border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-950/20'
-                                : 'border-rose-500/40 bg-rose-500/10 dark:bg-rose-950/20'
+                            ? 'border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-950/20'
+                            : 'border-rose-500/40 bg-rose-500/10 dark:bg-rose-950/20'
                             }`}
                     >
                         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
@@ -466,7 +466,7 @@ export default function TransactionsCreate({
                         </Button>
                         <Button
                             type="submit"
-                            disabled={processing || !isBalanced}
+                            disabled={processing}
                             className="bg-primary text-primary-foreground hover:bg-primary/90"
                         >
                             <Save className="mr-2 h-4 w-4" />
