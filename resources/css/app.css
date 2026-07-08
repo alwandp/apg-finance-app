@@ -141,3 +141,22 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer utilities {
+    .glass-content-bg {
+        background: linear-gradient(
+            135deg,
+            oklch(0.92 0.04 250),
+            oklch(0.88 0.06 290),
+            oklch(0.9 0.05 190)
+        );
+    }
+    .dark .glass-content-bg {
+        background: linear-gradient(
+            135deg,
+            oklch(0.25 0.12 280),
+            oklch(0.2 0.1 320),
+            oklch(0.22 0.08 200)
+        );
+    }
+}
