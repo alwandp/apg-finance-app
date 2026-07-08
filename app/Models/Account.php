@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Account|null $parent
  * @property-read Collection<int, Account> $children
+ * @property-read Collection<int, TransactionDetail> $transactionDetails
  */
 class Account extends Model
 {
@@ -104,5 +105,15 @@ class Account extends Model
     public function scopeActive(Builder $query): void
     {
         $query->where('is_active', true);
+    }
+
+    /**
+     * Get the transaction details associated with the account.
+     *
+     * @return HasMany<TransactionDetail, $this>
+     */
+    public function transactionDetails(): HasMany
+    {
+        return $this->hasMany(TransactionDetail::class);
     }
 }

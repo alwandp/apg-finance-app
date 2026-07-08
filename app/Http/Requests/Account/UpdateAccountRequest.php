@@ -29,7 +29,7 @@ class UpdateAccountRequest extends FormRequest
         $accountId = $account instanceof Account ? $account->id : $account;
 
         $hasTransactions = false;
-        if ($account instanceof Account && method_exists($account, 'transactionDetails')) {
+        if ($account instanceof Account) {
             $hasTransactions = $account->transactionDetails()->exists();
         }
 
