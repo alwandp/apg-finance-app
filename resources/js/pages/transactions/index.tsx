@@ -3,7 +3,7 @@ import { Plus, Filter, RotateCcw, Eye, Calendar } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -139,7 +139,7 @@ export default function TransactionsIndex({
                 </div>
 
                 {/* Filters Panel */}
-                <GlassCard intensity="low" className="p-4">
+                <DashboardCard className="p-4">
                     <form
                         onSubmit={applyFilters}
                         className="grid grid-cols-1 items-end gap-4 md:grid-cols-4"
@@ -153,7 +153,7 @@ export default function TransactionsIndex({
                                 type="date"
                                 value={startDate}
                                 onChange={(e) => setStartDate(e.target.value)}
-                                className="h-9 bg-white/60 text-sm dark:bg-slate-900/60"
+                                className="h-9 bg-white text-sm dark:bg-slate-900"
                             />
                         </div>
 
@@ -166,7 +166,7 @@ export default function TransactionsIndex({
                                 type="date"
                                 value={endDate}
                                 onChange={(e) => setEndDate(e.target.value)}
-                                className="h-9 bg-white/60 text-sm dark:bg-slate-900/60"
+                                className="h-9 bg-white text-sm dark:bg-slate-900"
                             />
                         </div>
 
@@ -178,7 +178,7 @@ export default function TransactionsIndex({
                                 value={accountId}
                                 onValueChange={setAccountId}
                             >
-                                <SelectTrigger className="h-9 bg-white/60 text-sm dark:bg-slate-900/60">
+                                <SelectTrigger className="h-9 bg-white text-sm dark:bg-slate-900">
                                     <SelectValue placeholder="All Accounts" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -214,20 +214,20 @@ export default function TransactionsIndex({
                                 variant="outline"
                                 size="sm"
                                 onClick={resetFilters}
-                                className="h-9 shrink-0 bg-white/40 dark:bg-slate-800/40"
+                                className="h-9 shrink-0 bg-white dark:bg-slate-800"
                             >
                                 <RotateCcw className="h-3.5 w-3.5" />
                             </Button>
                         </div>
                     </form>
-                </GlassCard>
+                </DashboardCard>
 
                 {/* Transactions Table */}
-                <GlassCard intensity="medium" className="overflow-hidden">
+                <DashboardCard className="overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full border-collapse text-left">
                             <thead>
-                                <tr className="border-b border-white/20 bg-white/30 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-white/10 dark:bg-slate-800/30">
+                                <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-slate-800 dark:bg-slate-800">
                                     <th className="p-4">Transaction ID</th>
                                     <th className="p-4">Date</th>
                                     <th className="p-4">Description</th>
@@ -240,7 +240,7 @@ export default function TransactionsIndex({
                                     <th className="p-4 text-right">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/10 text-sm dark:divide-white/5">
+                            <tbody className="divide-y divide-slate-200 text-sm dark:divide-slate-800">
                                 {txList.length === 0 ? (
                                     <tr>
                                         <td
@@ -259,7 +259,7 @@ export default function TransactionsIndex({
                                         return (
                                             <tr
                                                 key={tx.id}
-                                                className="transition-colors hover:bg-white/20 dark:hover:bg-white/5"
+                                                className="transition-colors hover:bg-slate-50 dark:hover:bg-slate-800"
                                             >
                                                 <td className="p-4 font-mono text-xs font-medium text-muted-foreground">
                                                     #
@@ -291,7 +291,7 @@ export default function TransactionsIndex({
                                                         variant="ghost"
                                                         size="sm"
                                                         asChild
-                                                        className="hover:bg-white/30 dark:hover:bg-slate-800/50"
+                                                        className="hover:bg-slate-50 dark:hover:bg-slate-800"
                                                     >
                                                         <Link
                                                             href={`/transactions/${tx.id}`}
@@ -311,7 +311,7 @@ export default function TransactionsIndex({
 
                     {/* Pagination */}
                     {paginationLinks.length > 3 && (
-                        <div className="flex items-center justify-between border-t border-white/20 bg-white/20 p-4 dark:border-white/10 dark:bg-slate-900/20">
+                        <div className="flex items-center justify-between border-t border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900">
                             <div className="text-xs text-muted-foreground">
                                 Showing page{' '}
                                 {Array.isArray(transactions)
@@ -342,7 +342,7 @@ export default function TransactionsIndex({
                                         }}
                                         className={`h-8 px-3 text-xs ${
                                             !link.active &&
-                                            'bg-white/40 dark:bg-slate-800/40'
+                                            'bg-white dark:bg-slate-800'
                                         }`}
                                         dangerouslySetInnerHTML={{
                                             __html: link.label,
@@ -352,7 +352,7 @@ export default function TransactionsIndex({
                             </div>
                         </div>
                     )}
-                </GlassCard>
+                </DashboardCard>
             </div>
         </AppLayout>
     );

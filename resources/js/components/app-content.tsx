@@ -15,7 +15,7 @@ export function AppContent({
     if (variant === 'sidebar') {
         return (
             <SidebarInset
-                className={`glass-content-bg ${className ?? ''}`}
+                className={`bg-slate-50 dark:bg-slate-950 ${className ?? ''}`}
                 {...props}
             >
                 {children}
@@ -25,7 +25,7 @@ export function AppContent({
 
     return (
         <main
-            className={`glass-content-bg mx-auto flex h-full w-full max-w-7xl flex-1 flex-col gap-4 rounded-xl ${className ?? ''}`}
+            className={`bg-slate-50 dark:bg-slate-950 mx-auto flex h-full w-full max-w-7xl flex-1 flex-col gap-4 rounded-xl ${className ?? ''}`}
             {...props}
         >
             {children}

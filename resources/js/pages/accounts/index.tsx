@@ -26,7 +26,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import { Input } from '@/components/ui/input';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
@@ -42,7 +42,7 @@ const getTypeBadgeStyles = (type: AccountType) => {
         case 'Asset':
             return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
         case 'Liability':
-            return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+            return 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20';
         case 'Equity':
             return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
         case 'Revenue':
@@ -93,7 +93,7 @@ const AccountTreeItem: React.FC<{
                 className="w-full"
             >
                 <div
-                    className="flex items-center justify-between border-b border-border/40 py-3 pr-4 transition-colors hover:bg-white/10 dark:hover:bg-white/5"
+                    className="flex items-center justify-between border-b border-border/40 py-3 pr-4 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
                     style={{ paddingLeft: `${level * 1.75 + 1}rem` }}
                 >
                     <div className="flex items-center gap-2">
@@ -102,7 +102,7 @@ const AccountTreeItem: React.FC<{
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="size-6 p-0 text-muted-foreground hover:bg-white/20 dark:hover:bg-white/10"
+                                    className="size-6 p-0 text-muted-foreground hover:bg-slate-50 dark:hover:bg-slate-100"
                                 >
                                     {isOpen ? (
                                         <ChevronDown className="size-4" />
@@ -151,7 +151,7 @@ const AccountTreeItem: React.FC<{
                                 asChild
                                 variant="ghost"
                                 size="icon"
-                                className="size-8 hover:bg-white/20 dark:hover:bg-white/10"
+                                className="size-8 hover:bg-slate-50 dark:hover:bg-slate-100"
                             >
                                 <Link
                                     href={`/accounts/${account.id}`}
@@ -165,7 +165,7 @@ const AccountTreeItem: React.FC<{
                                 asChild
                                 variant="ghost"
                                 size="icon"
-                                className="size-8 hover:bg-white/20 dark:hover:bg-white/10"
+                                className="size-8 hover:bg-slate-50 dark:hover:bg-slate-100"
                             >
                                 <Link
                                     href={`/accounts/${account.id}/edit`}
@@ -278,20 +278,20 @@ export default function AccountsIndex({ accounts = [] }: AccountsIndexProps) {
                     </Button>
                 </div>
 
-                <GlassCard intensity="low" className="p-4">
+                <DashboardCard className="p-4">
                     <div className="relative">
                         <Search className="absolute top-2.5 left-3 size-4 text-muted-foreground" />
                         <Input
                             placeholder="Search by code, account name, or type..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="bg-white/50 pl-9 dark:bg-slate-900/50"
+                            className="bg-white pl-9 dark:bg-slate-900"
                         />
                     </div>
-                </GlassCard>
+                </DashboardCard>
 
-                <GlassCard intensity="medium" className="overflow-hidden p-0">
-                    <div className="flex items-center justify-between border-b border-border/60 bg-white/30 px-5 py-3.5 text-xs font-semibold tracking-wider text-muted-foreground uppercase backdrop-blur-sm dark:bg-slate-900/30">
+                <DashboardCard className="overflow-hidden p-0">
+                    <div className="flex items-center justify-between border-b border-border/60 bg-slate-50 px-5 py-3.5 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:bg-slate-900">
                         <div>Account Hierarchy</div>
                         <div className="flex items-center gap-12 pr-16">
                             <span>Type</span>
@@ -333,7 +333,7 @@ export default function AccountsIndex({ accounts = [] }: AccountsIndexProps) {
                             ))
                         )}
                     </div>
-                </GlassCard>
+                </DashboardCard>
 
                 <Dialog
                     open={deletingAccount !== null}

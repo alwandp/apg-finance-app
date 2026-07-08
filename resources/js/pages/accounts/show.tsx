@@ -22,7 +22,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { Account, AccountType } from '@/types/account';
@@ -36,7 +36,7 @@ const getTypeBadgeStyles = (type: AccountType) => {
         case 'Asset':
             return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
         case 'Liability':
-            return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+            return 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20';
         case 'Equity':
             return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
         case 'Revenue':
@@ -102,7 +102,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                             asChild
                             variant="ghost"
                             size="icon"
-                            className="size-9 hover:bg-white/20 dark:hover:bg-white/10"
+                            className="size-9 hover:bg-slate-50 dark:hover:bg-slate-100"
                         >
                             <Link href="/accounts" title="Back to accounts">
                                 <ArrowLeft className="size-4" />
@@ -128,7 +128,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                         <Button
                             asChild
                             variant="outline"
-                            className="hover:bg-white/20 dark:hover:bg-white/10"
+                            className="hover:bg-slate-50 dark:hover:bg-slate-100"
                         >
                             <Link href={`/accounts/${account.id}/edit`}>
                                 <Edit2 className="mr-2 size-4" />
@@ -147,7 +147,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
 
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
                     <div className="space-y-6 lg:col-span-2">
-                        <GlassCard intensity="medium" className="p-6">
+                        <DashboardCard className="p-6">
                             <h2 className="mb-4 text-lg font-semibold text-foreground">
                                 Account Overview
                             </h2>
@@ -243,16 +243,16 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                     </dd>
                                 </div>
                             </dl>
-                        </GlassCard>
+                        </DashboardCard>
 
-                        <GlassCard intensity="low" className="p-6">
+                        <DashboardCard className="p-6">
                             <div className="mb-4 flex items-center gap-2">
                                 <History className="size-5 text-primary/80" />
                                 <h2 className="text-lg font-semibold text-foreground">
                                     Recent Transaction History
                                 </h2>
                             </div>
-                            <div className="rounded-lg border border-border/40 bg-white/20 p-6 text-center backdrop-blur-xs dark:bg-slate-900/20">
+                            <div className="rounded-lg border border-border/40 bg-slate-50 p-6 text-center dark:bg-slate-900">
                                 <p className="text-sm font-medium text-foreground">
                                     No double-entry transactions recorded yet.
                                 </p>
@@ -262,11 +262,11 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                     the system in Phase 4.
                                 </p>
                             </div>
-                        </GlassCard>
+                        </DashboardCard>
                     </div>
 
                     <div className="space-y-6">
-                        <GlassCard intensity="low" className="p-6">
+                        <DashboardCard className="p-6">
                             <div className="mb-4 flex items-center gap-2">
                                 <FolderTree className="size-5 text-primary/80" />
                                 <h2 className="text-lg font-semibold text-foreground">
@@ -315,9 +315,9 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                     ))}
                                 </ul>
                             )}
-                        </GlassCard>
+                        </DashboardCard>
 
-                        <GlassCard intensity="low" className="p-6">
+                        <DashboardCard className="p-6">
                             <h2 className="mb-4 text-sm font-semibold tracking-wider text-foreground uppercase">
                                 Metadata & Timestamps
                             </h2>
@@ -357,7 +357,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                     </span>
                                 </li>
                             </ul>
-                        </GlassCard>
+                        </DashboardCard>
                     </div>
                 </div>
 

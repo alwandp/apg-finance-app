@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Calendar, FileText, CheckCircle2 } from 'lucide-react';
 import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
@@ -68,7 +68,7 @@ export default function TransactionsShow({
                         variant="outline"
                         size="sm"
                         asChild
-                        className="bg-white/40 dark:bg-slate-800/40"
+                        className="bg-white dark:bg-slate-800"
                     >
                         <Link href="/transactions">
                             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -77,8 +77,8 @@ export default function TransactionsShow({
                     </Button>
                 </div>
 
-                <GlassCard intensity="medium" className="space-y-6 p-6">
-                    <div className="grid grid-cols-1 gap-6 rounded-xl border border-white/20 bg-white/40 p-4 md:grid-cols-2 dark:border-white/10 dark:bg-slate-800/40">
+                <DashboardCard className="space-y-6 p-6">
+                    <div className="grid grid-cols-1 gap-6 rounded-xl border border-slate-200 bg-white p-4 md:grid-cols-2 dark:border-slate-800 dark:bg-slate-800">
                         <div className="space-y-1">
                             <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                                 <Calendar className="h-3.5 w-3.5" /> Transaction
@@ -102,10 +102,10 @@ export default function TransactionsShow({
                         <h3 className="text-base font-semibold text-foreground">
                             Journal Line Items
                         </h3>
-                        <div className="overflow-x-auto rounded-xl border border-white/20 dark:border-white/10">
+                        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
                             <table className="w-full border-collapse text-left">
                                 <thead>
-                                    <tr className="border-b border-white/20 bg-white/30 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-white/10 dark:bg-slate-800/30">
+                                    <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-slate-800 dark:bg-slate-800">
                                         <th className="p-4">Account Code</th>
                                         <th className="p-4">Account Name</th>
                                         <th className="p-4 text-right">
@@ -116,7 +116,7 @@ export default function TransactionsShow({
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-white/10 text-sm dark:divide-white/5">
+                                <tbody className="divide-y divide-slate-200 text-sm dark:divide-slate-800">
                                     {transaction.details?.map((item) => {
                                         const amt =
                                             parseFloat(item.amount) || 0;
@@ -125,7 +125,7 @@ export default function TransactionsShow({
                                         return (
                                             <tr
                                                 key={item.id}
-                                                className="hover:bg-white/10 dark:hover:bg-white/5"
+                                                className="hover:bg-slate-100 dark:hover:bg-slate-800"
                                             >
                                                 <td className="p-4 font-mono font-semibold text-primary">
                                                     {item.account?.code ||
@@ -140,7 +140,7 @@ export default function TransactionsShow({
                                                         ? `$${amt.toFixed(2)}`
                                                         : '—'}
                                                 </td>
-                                                <td className="p-4 text-right font-mono font-semibold text-amber-600 dark:text-amber-400">
+                                                <td className="p-4 text-right font-mono font-semibold text-rose-600 dark:text-rose-400">
                                                     {!isDebit
                                                         ? `$${amt.toFixed(2)}`
                                                         : '—'}
@@ -150,7 +150,7 @@ export default function TransactionsShow({
                                     })}
                                 </tbody>
                                 <tfoot>
-                                    <tr className="border-t-2 border-white/30 bg-white/40 font-mono text-sm font-bold dark:border-white/20 dark:bg-slate-800/40">
+                                    <tr className="border-t-2 border-slate-200 bg-white font-mono text-sm font-bold dark:border-slate-800 dark:bg-slate-800">
                                         <td
                                             colSpan={2}
                                             className="p-4 text-right font-sans text-xs tracking-wider text-muted-foreground uppercase"
@@ -160,7 +160,7 @@ export default function TransactionsShow({
                                         <td className="p-4 text-right text-emerald-600 dark:text-emerald-400">
                                             ${totalDebit.toFixed(2)}
                                         </td>
-                                        <td className="p-4 text-right text-amber-600 dark:text-amber-400">
+                                        <td className="p-4 text-right text-rose-600 dark:text-rose-400">
                                             ${totalCredit.toFixed(2)}
                                         </td>
                                     </tr>
@@ -168,7 +168,7 @@ export default function TransactionsShow({
                             </table>
                         </div>
                     </div>
-                </GlassCard>
+                </DashboardCard>
             </div>
         </AppLayout>
     );

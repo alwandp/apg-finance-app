@@ -25,6 +25,7 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                                     ? isCurrentUrl(item.href)
                                     : isCurrentOrParentUrl(item.href)
                             }
+                            className="data-[active=true]:border-l-2 data-[active=true]:border-primary data-[active=true]:rounded-l-none"
                             tooltip={{ children: item.title }}
                         >
                             <Link href={item.href} prefetch>

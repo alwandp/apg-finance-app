@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -86,7 +86,7 @@ export default function AccountsEdit({
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="size-9 hover:bg-white/20 dark:hover:bg-white/10"
+                        className="size-9 hover:bg-slate-50 dark:hover:bg-slate-100"
                     >
                         <Link href="/accounts" title="Back to accounts">
                             <ArrowLeft className="size-4" />
@@ -103,7 +103,7 @@ export default function AccountsEdit({
                     </div>
                 </div>
 
-                <GlassCard intensity="medium" className="p-6 sm:p-8">
+                <DashboardCard className="p-6 sm:p-8">
                     <form onSubmit={submit} className="space-y-6">
                         <div className="space-y-2">
                             <Label htmlFor="code">Account Code</Label>
@@ -152,7 +152,7 @@ export default function AccountsEdit({
                             >
                                 <SelectTrigger
                                     id="parent_id"
-                                    className="bg-white/50 dark:bg-slate-900/50"
+                                    className="bg-white dark:bg-slate-900"
                                 >
                                     <SelectValue placeholder="Select parent account (or leave as root)" />
                                 </SelectTrigger>
@@ -191,7 +191,7 @@ export default function AccountsEdit({
                                     setData('name', e.target.value)
                                 }
                                 required
-                                className="bg-white/50 dark:bg-slate-900/50"
+                                className="bg-white dark:bg-slate-900"
                             />
                             <InputError message={errors.name} />
                         </div>
@@ -206,7 +206,7 @@ export default function AccountsEdit({
                             >
                                 <SelectTrigger
                                     id="type"
-                                    className="bg-white/50 dark:bg-slate-900/50"
+                                    className="bg-white dark:bg-slate-900"
                                 >
                                     <SelectValue placeholder="Select account type" />
                                 </SelectTrigger>
@@ -253,7 +253,7 @@ export default function AccountsEdit({
                                 asChild
                                 type="button"
                                 variant="outline"
-                                className="hover:bg-white/20 dark:hover:bg-white/10"
+                                className="hover:bg-slate-50 dark:hover:bg-slate-100"
                             >
                                 <Link href="/accounts">Cancel</Link>
                             </Button>
@@ -267,7 +267,7 @@ export default function AccountsEdit({
                             </Button>
                         </div>
                     </form>
-                </GlassCard>
+                </DashboardCard>
             </div>
         </AppLayout>
     );

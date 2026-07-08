@@ -12,7 +12,7 @@ import React, { useMemo } from 'react';
 import { toast } from 'sonner';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -163,7 +163,7 @@ export default function TransactionsCreate({
                 </div>
 
                 <form onSubmit={submit} className="space-y-6">
-                    <GlassCard intensity="medium" className="space-y-6 p-6">
+                    <DashboardCard className="space-y-6 p-6">
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                             <div className="space-y-2">
                                 <Label htmlFor="date">Transaction Date *</Label>
@@ -175,7 +175,7 @@ export default function TransactionsCreate({
                                         setData('date', e.target.value)
                                     }
                                     required
-                                    className="bg-white/50 dark:bg-slate-800/50"
+                                    className="bg-white dark:bg-slate-800"
                                 />
                                 <InputError message={errors.date} />
                             </div>
@@ -193,13 +193,13 @@ export default function TransactionsCreate({
                                         setData('description', e.target.value)
                                     }
                                     required
-                                    className="bg-white/50 dark:bg-slate-800/50"
+                                    className="bg-white dark:bg-slate-800"
                                 />
                                 <InputError message={errors.description} />
                             </div>
                         </div>
 
-                        <div className="space-y-4 border-t border-white/20 pt-4 dark:border-white/10">
+                        <div className="space-y-4 border-t border-slate-200 pt-4 dark:border-slate-800">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-base font-semibold text-foreground">
                                     Line Items (Debit & Credit)
@@ -209,7 +209,7 @@ export default function TransactionsCreate({
                                     variant="outline"
                                     size="sm"
                                     onClick={addRow}
-                                    className="bg-white/40 dark:bg-slate-800/40"
+                                    className="bg-white dark:bg-slate-800"
                                 >
                                     <Plus className="mr-1.5 h-4 w-4" />
                                     Add Line
@@ -235,7 +235,7 @@ export default function TransactionsCreate({
                                     return (
                                         <div
                                             key={idx}
-                                            className="grid grid-cols-12 items-start gap-3 rounded-lg border border-white/20 bg-white/30 p-3 dark:border-white/10 dark:bg-slate-800/30"
+                                            className="grid grid-cols-12 items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-800"
                                         >
                                             <div className="col-span-12 space-y-1 md:col-span-6">
                                                 <Label className="text-xs text-muted-foreground md:hidden">
@@ -255,7 +255,7 @@ export default function TransactionsCreate({
                                                         )
                                                     }
                                                 >
-                                                    <SelectTrigger className="bg-white/60 dark:bg-slate-900/60">
+                                                    <SelectTrigger className="bg-white dark:bg-slate-900">
                                                         <SelectValue placeholder="Select account..." />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -336,7 +336,7 @@ export default function TransactionsCreate({
                                                         )
                                                     }
                                                 >
-                                                    <SelectTrigger className="bg-white/60 dark:bg-slate-900/60">
+                                                    <SelectTrigger className="bg-white dark:bg-slate-900">
                                                         <SelectValue />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -348,7 +348,7 @@ export default function TransactionsCreate({
                                                         </SelectItem>
                                                         <SelectItem
                                                             value="credit"
-                                                            className="font-medium text-amber-600"
+                                                            className="font-medium text-rose-600"
                                                         >
                                                             Credit
                                                         </SelectItem>
@@ -374,7 +374,7 @@ export default function TransactionsCreate({
                                                         )
                                                     }
                                                     required
-                                                    className="bg-white/60 text-right font-mono font-semibold dark:bg-slate-900/60"
+                                                    className="bg-white text-right font-mono font-semibold dark:bg-slate-900"
                                                 />
                                                 <InputError
                                                     message={amountError}
@@ -402,15 +402,15 @@ export default function TransactionsCreate({
                                 })}
                             </div>
                         </div>
-                    </GlassCard>
+                    </DashboardCard>
 
                     {/* Live Balance Summary Panel */}
-                    <GlassCard
-                        intensity="high"
+                    <DashboardCard
+                       
                         className={`p-5 transition-colors duration-300 ${
                             isBalanced
                                 ? 'border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-950/20'
-                                : 'border-amber-500/40 bg-amber-500/10 dark:bg-amber-950/20'
+                                : 'border-rose-500/40 bg-rose-500/10 dark:bg-rose-950/20'
                         }`}
                     >
                         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
@@ -418,7 +418,7 @@ export default function TransactionsCreate({
                                 {isBalanced ? (
                                     <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" />
                                 ) : (
-                                    <AlertCircle className="h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
+                                    <AlertCircle className="h-6 w-6 shrink-0 text-rose-600 dark:text-rose-400" />
                                 )}
                                 <div>
                                     <h4 className="font-semibold text-foreground">
@@ -447,20 +447,20 @@ export default function TransactionsCreate({
                                     <div className="font-sans text-xs font-semibold text-muted-foreground uppercase">
                                         Total Credit
                                     </div>
-                                    <div className="font-bold text-amber-600 dark:text-amber-400">
+                                    <div className="font-bold text-rose-600 dark:text-rose-400">
                                         ${totalCredit.toFixed(2)}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </GlassCard>
+                    </DashboardCard>
 
                     <div className="flex justify-end gap-3">
                         <Button
                             type="button"
                             variant="outline"
                             asChild
-                            className="bg-white/40 dark:bg-slate-800/40"
+                            className="bg-white dark:bg-slate-800"
                         >
                             <Link href="/transactions">Cancel</Link>
                         </Button>

@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { GlassCard } from '@/components/ui/glass-card';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
@@ -75,8 +75,8 @@ export default function Dashboard({
 
                 {/* Summary Cards Grid */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    <GlassCard
-                        intensity="low"
+                    <DashboardCard
+                       
                         className="space-y-3 border-l-4 border-l-primary p-6"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -98,10 +98,10 @@ export default function Dashboard({
                         <p className="text-xs text-muted-foreground">
                             Active and inactive accounts in hierarchy.
                         </p>
-                    </GlassCard>
+                    </DashboardCard>
 
-                    <GlassCard
-                        intensity="low"
+                    <DashboardCard
+                       
                         className="space-y-3 border-l-4 border-l-blue-500 p-6"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -123,14 +123,14 @@ export default function Dashboard({
                         <p className="text-xs text-muted-foreground">
                             Posted immutable journal entries.
                         </p>
-                    </GlassCard>
+                    </DashboardCard>
 
-                    <GlassCard
-                        intensity="medium"
+                    <DashboardCard
+                       
                         className={`space-y-3 border-l-4 p-6 ${
                             summary.is_balanced
                                 ? 'border-l-emerald-500 bg-emerald-500/5 dark:bg-emerald-950/10'
-                                : 'border-l-amber-500 bg-amber-500/5 dark:bg-amber-950/10'
+                                : 'border-l-amber-500 bg-rose-500/5 dark:bg-rose-950/10'
                         }`}
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -138,7 +138,7 @@ export default function Dashboard({
                             {summary.is_balanced ? (
                                 <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                             ) : (
-                                <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                                <AlertTriangle className="h-5 w-5 text-rose-600 dark:text-rose-400" />
                             )}
                         </div>
                         <div className="flex items-baseline justify-between">
@@ -146,7 +146,7 @@ export default function Dashboard({
                                 className={`font-sans text-xl font-bold ${
                                     summary.is_balanced
                                         ? 'text-emerald-600 dark:text-emerald-400'
-                                        : 'text-amber-600 dark:text-amber-400'
+                                        : 'text-rose-600 dark:text-rose-400'
                                 }`}
                             >
                                 {summary.is_balanced
@@ -161,11 +161,11 @@ export default function Dashboard({
                                 <ArrowRight className="ml-1 h-3 w-3" />
                             </Link>
                         </div>
-                        <div className="flex items-center justify-between border-t border-white/10 pt-1 font-mono text-xs text-muted-foreground">
+                        <div className="flex items-center justify-between border-t border-slate-200 pt-1 font-mono text-xs text-muted-foreground">
                             <span>Debits: ${summary.total_debit}</span>
                             <span>Credits: ${summary.total_credit}</span>
                         </div>
-                    </GlassCard>
+                    </DashboardCard>
                 </div>
 
                 {/* Quick Actions Panel */}
@@ -175,9 +175,9 @@ export default function Dashboard({
                     </h2>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <Link href="/accounts/create" className="group">
-                            <GlassCard
-                                intensity="low"
-                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white/40 dark:hover:bg-slate-800/60"
+                            <DashboardCard
+                               
+                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-primary/10 p-2 text-primary transition-transform group-hover:scale-110">
                                     <Layers className="h-5 w-5" />
@@ -190,13 +190,13 @@ export default function Dashboard({
                                         Add to Chart of Accounts
                                     </div>
                                 </div>
-                            </GlassCard>
+                            </DashboardCard>
                         </Link>
 
                         <Link href="/transactions/create" className="group">
-                            <GlassCard
-                                intensity="low"
-                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white/40 dark:hover:bg-slate-800/60"
+                            <DashboardCard
+                               
+                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-blue-500/10 p-2 text-blue-500 transition-transform group-hover:scale-110">
                                     <DollarSign className="h-5 w-5" />
@@ -209,13 +209,13 @@ export default function Dashboard({
                                         Post double-entry journal
                                     </div>
                                 </div>
-                            </GlassCard>
+                            </DashboardCard>
                         </Link>
 
                         <Link href="/reports/trial-balance" className="group">
-                            <GlassCard
-                                intensity="low"
-                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white/40 dark:hover:bg-slate-800/60"
+                            <DashboardCard
+                               
+                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-500 transition-transform group-hover:scale-110">
                                     <BarChart3 className="h-5 w-5" />
@@ -228,14 +228,14 @@ export default function Dashboard({
                                         Inspect ledger balances
                                     </div>
                                 </div>
-                            </GlassCard>
+                            </DashboardCard>
                         </Link>
                     </div>
                 </div>
 
                 {/* Recent Transactions Table */}
-                <GlassCard intensity="medium" className="overflow-hidden">
-                    <div className="flex items-center justify-between border-b border-white/20 bg-white/20 p-4 dark:border-white/10 dark:bg-slate-800/20">
+                <DashboardCard className="overflow-hidden">
+                    <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900">
                         <h3 className="text-base font-semibold text-foreground">
                             Recent Transactions
                         </h3>
@@ -252,14 +252,14 @@ export default function Dashboard({
                     <div className="overflow-x-auto">
                         <table className="w-full border-collapse text-left">
                             <thead>
-                                <tr className="border-b border-white/20 bg-white/30 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-white/10 dark:bg-slate-800/30">
+                                <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-slate-800 dark:bg-slate-800">
                                     <th className="p-4">ID</th>
                                     <th className="p-4">Date</th>
                                     <th className="p-4">Description</th>
                                     <th className="p-4 text-right">Amount</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/10 text-sm dark:divide-white/5">
+                            <tbody className="divide-y divide-slate-200 text-sm dark:divide-slate-800">
                                 {recent_transactions.length === 0 ? (
                                     <tr>
                                         <td
@@ -287,7 +287,7 @@ export default function Dashboard({
                                         return (
                                             <tr
                                                 key={tx.id}
-                                                className="transition-colors hover:bg-white/15 dark:hover:bg-white/5"
+                                                className="transition-colors hover:bg-slate-50 dark:hover:bg-slate-800"
                                             >
                                                 <td className="p-4 font-mono text-xs text-muted-foreground">
                                                     #
@@ -319,7 +319,7 @@ export default function Dashboard({
                             </tbody>
                         </table>
                     </div>
-                </GlassCard>
+                </DashboardCard>
             </div>
         </AppLayout>
     );
