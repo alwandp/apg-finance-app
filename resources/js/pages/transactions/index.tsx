@@ -14,6 +14,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
+import { formatCurrency } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Account } from '@/types/account';
 import type { Transaction } from '@/types/transaction';
@@ -116,7 +117,7 @@ export default function TransactionsIndex({
         >
             <Head title="Audit Trail & Ledger" />
 
-            <div className="mx-auto max-w-7xl space-y-6 p-6">
+            <div className="flex flex-col gap-6 p-6">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
                         <h1 className="text-2xl font-bold tracking-tight text-foreground">
@@ -284,7 +285,7 @@ export default function TransactionsIndex({
                                                     </span>
                                                 </td>
                                                 <td className="p-4 text-right font-mono font-semibold text-foreground">
-                                                    ${totalAmt.toFixed(2)}
+                                                    {formatCurrency(totalAmt)}
                                                 </td>
                                                 <td className="p-4 text-right">
                                                     <Button
@@ -340,10 +341,9 @@ export default function TransactionsIndex({
                                                 );
                                             }
                                         }}
-                                        className={`h-8 px-3 text-xs ${
-                                            !link.active &&
+                                        className={`h-8 px-3 text-xs ${!link.active &&
                                             'bg-white dark:bg-slate-800'
-                                        }`}
+                                            }`}
                                         dangerouslySetInnerHTML={{
                                             __html: link.label,
                                         }}

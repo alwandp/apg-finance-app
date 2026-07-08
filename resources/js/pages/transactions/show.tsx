@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
+import { formatCurrency } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
 
@@ -137,12 +138,12 @@ export default function TransactionsShow({
                                                 </td>
                                                 <td className="p-4 text-right font-mono font-semibold text-emerald-600 dark:text-emerald-400">
                                                     {isDebit
-                                                        ? `$${amt.toFixed(2)}`
+                                                        ? formatCurrency(amt)
                                                         : '—'}
                                                 </td>
                                                 <td className="p-4 text-right font-mono font-semibold text-rose-600 dark:text-rose-400">
                                                     {!isDebit
-                                                        ? `$${amt.toFixed(2)}`
+                                                        ? formatCurrency(amt)
                                                         : '—'}
                                                 </td>
                                             </tr>
@@ -158,10 +159,10 @@ export default function TransactionsShow({
                                             Total Equilibrium
                                         </td>
                                         <td className="p-4 text-right text-emerald-600 dark:text-emerald-400">
-                                            ${totalDebit.toFixed(2)}
+                                            {formatCurrency(totalDebit)}
                                         </td>
                                         <td className="p-4 text-right text-rose-600 dark:text-rose-400">
-                                            ${totalCredit.toFixed(2)}
+                                            {formatCurrency(totalCredit)}
                                         </td>
                                     </tr>
                                 </tfoot>

@@ -6,11 +6,12 @@ import {
     TrendingUp,
     TrendingDown,
     Layers,
-    DollarSign,
+    Banknote,
 } from 'lucide-react';
 import React, { useMemo } from 'react';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
+import { formatCurrency } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { AccountType } from '@/types/account';
 import type { TrialBalanceEntry } from '@/types/transaction';
@@ -122,7 +123,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                             <Layers className="h-4 w-4 text-blue-500" />
                         </div>
                         <div className="font-mono text-xl font-bold text-foreground">
-                            ${totals.Asset.toFixed(2)}
+                            {formatCurrency(totals.Asset)}
                         </div>
                     </DashboardCard>
 
@@ -135,7 +136,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                             <TrendingDown className="h-4 w-4 text-amber-500" />
                         </div>
                         <div className="font-mono text-xl font-bold text-foreground">
-                            ${totals.Liability.toFixed(2)}
+                            {formatCurrency(totals.Liability)}
                         </div>
                     </DashboardCard>
 
@@ -148,7 +149,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                             <Scale className="h-4 w-4 text-purple-500" />
                         </div>
                         <div className="font-mono text-xl font-bold text-foreground">
-                            ${totals.Equity.toFixed(2)}
+                            {formatCurrency(totals.Equity)}
                         </div>
                     </DashboardCard>
 
@@ -161,7 +162,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                             <TrendingUp className="h-4 w-4 text-emerald-500" />
                         </div>
                         <div className="font-mono text-xl font-bold text-foreground">
-                            ${totals.Revenue.toFixed(2)}
+                            {formatCurrency(totals.Revenue)}
                         </div>
                     </DashboardCard>
 
@@ -171,10 +172,10 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                             <span>Expenses</span>
-                            <DollarSign className="h-4 w-4 text-rose-500" />
+                            <Banknote className="h-4 w-4 text-rose-500" />
                         </div>
                         <div className="font-mono text-xl font-bold text-foreground">
-                            ${totals.Expense.toFixed(2)}
+                            {formatCurrency(totals.Expense)}
                         </div>
                     </DashboardCard>
                 </div>
@@ -257,13 +258,13 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                                                                 </span>
                                                             </td>
                                                             <td className="p-4 text-right font-mono text-emerald-600 dark:text-emerald-400">
-                                                                ${d.toFixed(2)}
+                                                                {formatCurrency(d)}
                                                             </td>
                                                             <td className="p-4 text-right font-mono text-rose-600 dark:text-rose-400">
-                                                                ${c.toFixed(2)}
+                                                                {formatCurrency(c)}
                                                             </td>
                                                             <td className="p-4 text-right font-mono font-semibold text-foreground">
-                                                                ${b.toFixed(2)}
+                                                                {formatCurrency(b)}
                                                             </td>
                                                         </tr>
                                                     );
@@ -282,10 +283,10 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                                         Grand Totals & Equilibrium
                                     </td>
                                     <td className="p-4 text-right text-emerald-600 dark:text-emerald-400">
-                                        ${grandDebit.toFixed(2)}
+                                        {formatCurrency(grandDebit)}
                                     </td>
                                     <td className="p-4 text-right text-rose-600 dark:text-rose-400">
-                                        ${grandCredit.toFixed(2)}
+                                        {formatCurrency(grandCredit)}
                                     </td>
                                     <td className="p-4 text-right">
                                         {isBalanced ? (

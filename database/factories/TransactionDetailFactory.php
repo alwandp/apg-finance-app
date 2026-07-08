@@ -24,7 +24,7 @@ class TransactionDetailFactory extends Factory
             'transaction_id' => Transaction::factory(),
             'account_id' => Account::factory(),
             'type' => fake()->randomElement(TransactionEntryType::cases()),
-            'amount' => fake()->randomFloat(2, 10, 1000),
+            'amount' => fake()->numberBetween(150, 15000) * 1000,
         ];
     }
 

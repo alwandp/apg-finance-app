@@ -8,12 +8,13 @@ import {
     BarChart3,
     ArrowRight,
     Calendar,
-    DollarSign,
+    Banknote,
 } from 'lucide-react';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
+import { formatCurrency } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
 
@@ -160,8 +161,8 @@ export default function Dashboard({
                             </Link>
                         </div>
                         <div className="flex items-center justify-between border-t border-slate-200 pt-1 font-mono text-xs text-muted-foreground">
-                            <span>Debits: ${summary.total_debit}</span>
-                            <span>Credits: ${summary.total_credit}</span>
+                            <span>Debits: {formatCurrency(summary.total_debit)}</span>
+                            <span>Credits: {formatCurrency(summary.total_credit)}</span>
                         </div>
                     </DashboardCard>
                 </div>
@@ -197,7 +198,7 @@ export default function Dashboard({
                                 className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-blue-500/10 p-2 text-blue-500 transition-transform group-hover:scale-110">
-                                    <DollarSign className="h-5 w-5" />
+                                    <Banknote className="h-5 w-5" />
                                 </div>
                                 <div>
                                     <div className="text-sm font-semibold text-foreground">
@@ -308,7 +309,7 @@ export default function Dashboard({
                                                     </Link>
                                                 </td>
                                                 <td className="p-4 text-right font-mono font-semibold text-foreground">
-                                                    ${totalAmt.toFixed(2)}
+                                                    {formatCurrency(totalAmt)}
                                                 </td>
                                             </tr>
                                         );

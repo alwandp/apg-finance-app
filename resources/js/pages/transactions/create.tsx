@@ -25,6 +25,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
+import { formatCurrency } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Account, AccountType } from '@/types/account';
 import type { TransactionEntryType } from '@/types/transaction';
@@ -428,7 +429,7 @@ export default function TransactionsCreate({
                                     <p className="text-xs text-muted-foreground">
                                         {isBalanced
                                             ? 'Debits and credits equal precisely.'
-                                            : `Debits must equal credits. Current variance: $${difference.toFixed(2)}`}
+                                            : `Debits must equal credits. Current variance: ${formatCurrency(difference)}`}
                                     </p>
                                 </div>
                             </div>
@@ -439,7 +440,7 @@ export default function TransactionsCreate({
                                         Total Debit
                                     </div>
                                     <div className="font-bold text-emerald-600 dark:text-emerald-400">
-                                        ${totalDebit.toFixed(2)}
+                                        {formatCurrency(totalDebit)}
                                     </div>
                                 </div>
                                 <div className="text-right">
@@ -447,7 +448,7 @@ export default function TransactionsCreate({
                                         Total Credit
                                     </div>
                                     <div className="font-bold text-rose-600 dark:text-rose-400">
-                                        ${totalCredit.toFixed(2)}
+                                        {formatCurrency(totalCredit)}
                                     </div>
                                 </div>
                             </div>
