@@ -1,36 +1,326 @@
-import { Head } from '@inertiajs/react';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import { Head, Link } from '@inertiajs/react';
+import {
+    Layers,
+    FileText,
+    CheckCircle2,
+    AlertTriangle,
+    Plus,
+    BarChart3,
+    ArrowRight,
+    Calendar,
+    DollarSign,
+} from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { GlassCard } from '@/components/ui/glass-card';
+import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
+import type { Transaction } from '@/types/transaction';
 
-export default function Dashboard() {
-    return (
-        <>
-            <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                </div>
-                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                </div>
-            </div>
-        </>
-    );
+interface DashboardProps {
+    summary?: {
+        total_accounts: number;
+        total_transactions: number;
+        total_debit: string;
+        total_credit: string;
+        is_balanced: boolean;
+    };
+    recent_transactions?: Transaction[];
 }
 
-Dashboard.layout = {
-    breadcrumbs: [
-        {
-            title: 'Dashboard',
-            href: dashboard(),
-        },
-    ],
-};
+export default function Dashboard({
+    summary = {
+        total_accounts: 0,
+        total_transactions: 0,
+        total_debit: '0.00',
+        total_credit: '0.00',
+        is_balanced: true,
+    },
+    recent_transactions = [],
+}: DashboardProps) {
+    return (
+        <AppLayout
+            breadcrumbs={[
+                {
+                    title: 'Dashboard',
+                    href: dashboard(),
+                },
+            ]}
+        >
+            <Head title="Dashboard" />
+            <div className="mx-auto max-w-7xl space-y-6 p-6">
+                <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                    <div>
+                        <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                            Financial Overview
+                        </h1>
+                        <p className="text-sm text-muted-foreground">
+                            Real-time double-entry ledger metrics and system
+                            equilibrium status.
+                        </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Button
+                            asChild
+                            size="sm"
+                            className="bg-primary text-primary-foreground hover:bg-primary/90"
+                        >
+                            <Link href="/transactions/create">
+                                <Plus className="mr-1.5 h-4 w-4" />
+                                Record Entry
+                            </Link>
+                        </Button>
+                    </div>
+                </div>
+
+                {/* Summary Cards Grid */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    <GlassCard
+                        intensity="low"
+                        className="space-y-3 border-l-4 border-l-primary p-6"
+                    >
+                        <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                            <span>Chart of Accounts</span>
+                            <Layers className="h-5 w-5 text-primary" />
+                        </div>
+                        <div className="flex items-baseline justify-between">
+                            <div className="font-mono text-3xl font-bold text-foreground">
+                                {summary.total_accounts}
+                            </div>
+                            <Link
+                                href="/accounts"
+                                className="flex items-center text-xs font-medium text-primary hover:underline"
+                            >
+                                View Accounts{' '}
+                                <ArrowRight className="ml-1 h-3 w-3" />
+                            </Link>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                            Active and inactive accounts in hierarchy.
+                        </p>
+                    </GlassCard>
+
+                    <GlassCard
+                        intensity="low"
+                        className="space-y-3 border-l-4 border-l-blue-500 p-6"
+                    >
+                        <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                            <span>Total Transactions</span>
+                            <FileText className="h-5 w-5 text-blue-500" />
+                        </div>
+                        <div className="flex items-baseline justify-between">
+                            <div className="font-mono text-3xl font-bold text-foreground">
+                                {summary.total_transactions}
+                            </div>
+                            <Link
+                                href="/transactions"
+                                className="flex items-center text-xs font-medium text-blue-500 hover:underline"
+                            >
+                                View Ledger{' '}
+                                <ArrowRight className="ml-1 h-3 w-3" />
+                            </Link>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                            Posted immutable journal entries.
+                        </p>
+                    </GlassCard>
+
+                    <GlassCard
+                        intensity="medium"
+                        className={`space-y-3 border-l-4 p-6 ${
+                            summary.is_balanced
+                                ? 'border-l-emerald-500 bg-emerald-500/5 dark:bg-emerald-950/10'
+                                : 'border-l-amber-500 bg-amber-500/5 dark:bg-amber-950/10'
+                        }`}
+                    >
+                        <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                            <span>Ledger Equilibrium</span>
+                            {summary.is_balanced ? (
+                                <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                            ) : (
+                                <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                            )}
+                        </div>
+                        <div className="flex items-baseline justify-between">
+                            <div
+                                className={`font-sans text-xl font-bold ${
+                                    summary.is_balanced
+                                        ? 'text-emerald-600 dark:text-emerald-400'
+                                        : 'text-amber-600 dark:text-amber-400'
+                                }`}
+                            >
+                                {summary.is_balanced
+                                    ? 'Balanced ✓'
+                                    : 'Out of Balance ✗'}
+                            </div>
+                            <Link
+                                href="/reports/trial-balance"
+                                className="flex items-center text-xs font-medium text-primary hover:underline"
+                            >
+                                Trial Balance{' '}
+                                <ArrowRight className="ml-1 h-3 w-3" />
+                            </Link>
+                        </div>
+                        <div className="flex items-center justify-between border-t border-white/10 pt-1 font-mono text-xs text-muted-foreground">
+                            <span>Debits: ${summary.total_debit}</span>
+                            <span>Credits: ${summary.total_credit}</span>
+                        </div>
+                    </GlassCard>
+                </div>
+
+                {/* Quick Actions Panel */}
+                <div className="space-y-3">
+                    <h2 className="text-base font-semibold text-foreground">
+                        Quick Actions
+                    </h2>
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        <Link href="/accounts/create" className="group">
+                            <GlassCard
+                                intensity="low"
+                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white/40 dark:hover:bg-slate-800/60"
+                            >
+                                <div className="rounded-lg bg-primary/10 p-2 text-primary transition-transform group-hover:scale-110">
+                                    <Layers className="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-semibold text-foreground">
+                                        New Account
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                        Add to Chart of Accounts
+                                    </div>
+                                </div>
+                            </GlassCard>
+                        </Link>
+
+                        <Link href="/transactions/create" className="group">
+                            <GlassCard
+                                intensity="low"
+                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white/40 dark:hover:bg-slate-800/60"
+                            >
+                                <div className="rounded-lg bg-blue-500/10 p-2 text-blue-500 transition-transform group-hover:scale-110">
+                                    <DollarSign className="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-semibold text-foreground">
+                                        Record Transaction
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                        Post double-entry journal
+                                    </div>
+                                </div>
+                            </GlassCard>
+                        </Link>
+
+                        <Link href="/reports/trial-balance" className="group">
+                            <GlassCard
+                                intensity="low"
+                                className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white/40 dark:hover:bg-slate-800/60"
+                            >
+                                <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-500 transition-transform group-hover:scale-110">
+                                    <BarChart3 className="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-semibold text-foreground">
+                                        Trial Balance Report
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                        Inspect ledger balances
+                                    </div>
+                                </div>
+                            </GlassCard>
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Recent Transactions Table */}
+                <GlassCard intensity="medium" className="overflow-hidden">
+                    <div className="flex items-center justify-between border-b border-white/20 bg-white/20 p-4 dark:border-white/10 dark:bg-slate-800/20">
+                        <h3 className="text-base font-semibold text-foreground">
+                            Recent Transactions
+                        </h3>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            asChild
+                            className="text-xs"
+                        >
+                            <Link href="/transactions">View All →</Link>
+                        </Button>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse text-left">
+                            <thead>
+                                <tr className="border-b border-white/20 bg-white/30 text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:border-white/10 dark:bg-slate-800/30">
+                                    <th className="p-4">ID</th>
+                                    <th className="p-4">Date</th>
+                                    <th className="p-4">Description</th>
+                                    <th className="p-4 text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/10 text-sm dark:divide-white/5">
+                                {recent_transactions.length === 0 ? (
+                                    <tr>
+                                        <td
+                                            colSpan={4}
+                                            className="p-8 text-center text-muted-foreground"
+                                        >
+                                            No transactions recorded yet.
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    recent_transactions.map((tx) => {
+                                        const totalAmt =
+                                            tx.details
+                                                ?.filter(
+                                                    (d) => d.type === 'debit',
+                                                )
+                                                .reduce(
+                                                    (sum, d) =>
+                                                        sum +
+                                                        (parseFloat(d.amount) ||
+                                                            0),
+                                                    0,
+                                                ) || 0;
+
+                                        return (
+                                            <tr
+                                                key={tx.id}
+                                                className="transition-colors hover:bg-white/15 dark:hover:bg-white/5"
+                                            >
+                                                <td className="p-4 font-mono text-xs text-muted-foreground">
+                                                    #
+                                                    {tx.id
+                                                        .toString()
+                                                        .padStart(5, '0')}
+                                                </td>
+                                                <td className="p-4 font-mono text-xs whitespace-nowrap">
+                                                    <div className="flex items-center gap-1.5">
+                                                        <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+                                                        <span>{tx.date}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="p-4 font-medium text-foreground">
+                                                    <Link
+                                                        href={`/transactions/${tx.id}`}
+                                                        className="transition-colors hover:text-primary"
+                                                    >
+                                                        {tx.description}
+                                                    </Link>
+                                                </td>
+                                                <td className="p-4 text-right font-mono font-semibold text-foreground">
+                                                    ${totalAmt.toFixed(2)}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </GlassCard>
+            </div>
+        </AppLayout>
+    );
+}

@@ -21,12 +21,14 @@ class TransactionController extends Controller
     {
         $query = Transaction::with(['details.account']);
 
-        if ($request->filled('start_date')) {
-            $query->whereDate('date', '>=', (string) $request->input('start_date'));
+        $startDate = $request->input('start_date', $request->input('from'));
+        if (! empty($startDate)) {
+            $query->whereDate('date', '>=', (string) $startDate);
         }
 
-        if ($request->filled('end_date')) {
-            $query->whereDate('date', '<=', (string) $request->input('end_date'));
+        $endDate = $request->input('end_date', $request->input('to'));
+        if (! empty($endDate)) {
+            $query->whereDate('date', '<=', (string) $endDate);
         }
 
         if ($request->filled('account_id')) {
@@ -38,14 +40,21 @@ class TransactionController extends Controller
 
         $transactions = $query->orderByDesc('date')
             ->orderByDesc('id')
-            ->get();
+            ->paginate(15)
+            ->withQueryString();
 
         $accounts = Account::orderBy('code')->get();
 
         return Inertia::render('transactions/index', [
             'transactions' => $transactions,
             'accounts' => $accounts,
-            'filters' => $request->only(['start_date', 'end_date', 'account_id']),
+            'filters' => [
+                'start_date' => $startDate ?? '',
+                'end_date' => $endDate ?? '',
+                'from' => $startDate ?? '',
+                'to' => $endDate ?? '',
+                'account_id' => $request->input('account_id', ''),
+            ],
         ]);
     }
 

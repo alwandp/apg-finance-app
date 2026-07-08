@@ -172,8 +172,8 @@ test('transactions index endpoint filters by date range correctly', function () 
     $response->assertOk();
     $response->assertInertia(fn ($page) => $page
         ->component('transactions/index')
-        ->has('transactions', 1)
-        ->where('transactions.0.id', $newTx->id)
+        ->has('transactions.data', 1)
+        ->where('transactions.data.0.id', $newTx->id)
     );
 });
 
@@ -201,8 +201,8 @@ test('transactions index endpoint filters by account correctly', function () {
     $response->assertOk();
     $response->assertInertia(fn ($page) => $page
         ->component('transactions/index')
-        ->has('transactions', 1)
-        ->where('transactions.0.id', $tx1->id)
+        ->has('transactions.data', 1)
+        ->where('transactions.data.0.id', $tx1->id)
     );
 });
 
