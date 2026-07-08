@@ -74,7 +74,7 @@ export default function AccountsCreate({
         >
             <Head title="Create Account - Chart of Accounts" />
 
-            <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 p-6">
+            <div className="flex flex-col gap-6 p-6">
                 <div className="flex items-center gap-4">
                     <Button
                         asChild

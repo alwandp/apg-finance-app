@@ -144,8 +144,8 @@ export default function TransactionsCreate({
         >
             <Head title="Record Journal Entry" />
 
-            <div className="mx-auto max-w-5xl space-y-6 p-6">
-                <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-6 p-6">
+                <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
                         <h1 className="text-2xl font-bold tracking-tight text-foreground">
                             Record Journal Entry
@@ -266,7 +266,7 @@ export default function TransactionsCreate({
                                                         ).map((groupType) => {
                                                             const group =
                                                                 groupedAccounts[
-                                                                    groupType
+                                                                groupType
                                                                 ];
 
                                                             if (
@@ -406,12 +406,11 @@ export default function TransactionsCreate({
 
                     {/* Live Balance Summary Panel */}
                     <DashboardCard
-                       
-                        className={`p-5 transition-colors duration-300 ${
-                            isBalanced
+
+                        className={`p-5 transition-colors duration-300 ${isBalanced
                                 ? 'border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-950/20'
                                 : 'border-rose-500/40 bg-rose-500/10 dark:bg-rose-950/20'
-                        }`}
+                            }`}
                     >
                         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                             <div className="flex items-center gap-3">

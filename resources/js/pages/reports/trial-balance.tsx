@@ -85,7 +85,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
         >
             <Head title="Trial Balance Report" />
 
-            <div className="mx-auto max-w-7xl space-y-6 p-6">
+            <div className="flex flex-col gap-6 p-6">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
                         <div className="flex items-center gap-2">
@@ -114,7 +114,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                 {/* Summary Cards */}
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                     <DashboardCard
-                       
+
                         className="space-y-2 border-l-4 border-l-blue-500 p-4"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -127,7 +127,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                     </DashboardCard>
 
                     <DashboardCard
-                       
+
                         className="space-y-2 border-l-4 border-l-amber-500 p-4"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -140,7 +140,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                     </DashboardCard>
 
                     <DashboardCard
-                       
+
                         className="space-y-2 border-l-4 border-l-purple-500 p-4"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -153,7 +153,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                     </DashboardCard>
 
                     <DashboardCard
-                       
+
                         className="space-y-2 border-l-4 border-l-emerald-500 p-4"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -166,7 +166,7 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                     </DashboardCard>
 
                     <DashboardCard
-                       
+
                         className="space-y-2 border-l-4 border-l-rose-500 p-4"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">

@@ -18,6 +18,7 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import {
     Dialog,
     DialogContent,
@@ -26,7 +27,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { DashboardCard } from "@/components/ui/dashboard-card";
 import { Input } from '@/components/ui/input';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
@@ -229,7 +229,7 @@ export default function AccountsIndex({ accounts = [] }: AccountsIndexProps) {
             onError: (errors: Record<string, string>) => {
                 toast.error(
                     errors.error ||
-                        'Cannot delete account because it has child accounts attached.',
+                    'Cannot delete account because it has child accounts attached.',
                 );
                 setDeletingAccount(null);
                 setIsDeleting(false);

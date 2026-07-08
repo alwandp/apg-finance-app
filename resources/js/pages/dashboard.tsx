@@ -48,7 +48,7 @@ export default function Dashboard({
             ]}
         >
             <Head title="Dashboard" />
-            <div className="mx-auto max-w-7xl space-y-6 p-6">
+            <div className="flex flex-col gap-6 p-6">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
                         <h1 className="text-2xl font-bold tracking-tight text-foreground">
@@ -76,7 +76,7 @@ export default function Dashboard({
                 {/* Summary Cards Grid */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                     <DashboardCard
-                       
+
                         className="space-y-3 border-l-4 border-l-primary p-6"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -101,7 +101,7 @@ export default function Dashboard({
                     </DashboardCard>
 
                     <DashboardCard
-                       
+
                         className="space-y-3 border-l-4 border-l-blue-500 p-6"
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -126,12 +126,11 @@ export default function Dashboard({
                     </DashboardCard>
 
                     <DashboardCard
-                       
-                        className={`space-y-3 border-l-4 p-6 ${
-                            summary.is_balanced
+
+                        className={`space-y-3 border-l-4 p-6 ${summary.is_balanced
                                 ? 'border-l-emerald-500 bg-emerald-500/5 dark:bg-emerald-950/10'
                                 : 'border-l-amber-500 bg-rose-500/5 dark:bg-rose-950/10'
-                        }`}
+                            }`}
                     >
                         <div className="flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                             <span>Ledger Equilibrium</span>
@@ -143,11 +142,10 @@ export default function Dashboard({
                         </div>
                         <div className="flex items-baseline justify-between">
                             <div
-                                className={`font-sans text-xl font-bold ${
-                                    summary.is_balanced
+                                className={`font-sans text-xl font-bold ${summary.is_balanced
                                         ? 'text-emerald-600 dark:text-emerald-400'
                                         : 'text-rose-600 dark:text-rose-400'
-                                }`}
+                                    }`}
                             >
                                 {summary.is_balanced
                                     ? 'Balanced ✓'
@@ -176,7 +174,7 @@ export default function Dashboard({
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <Link href="/accounts/create" className="group">
                             <DashboardCard
-                               
+
                                 className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-primary/10 p-2 text-primary transition-transform group-hover:scale-110">
@@ -195,7 +193,7 @@ export default function Dashboard({
 
                         <Link href="/transactions/create" className="group">
                             <DashboardCard
-                               
+
                                 className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-blue-500/10 p-2 text-blue-500 transition-transform group-hover:scale-110">
@@ -214,7 +212,7 @@ export default function Dashboard({
 
                         <Link href="/reports/trial-balance" className="group">
                             <DashboardCard
-                               
+
                                 className="flex items-center gap-3 border-dashed p-4 transition-all hover:bg-white dark:hover:bg-slate-800"
                             >
                                 <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-500 transition-transform group-hover:scale-110">

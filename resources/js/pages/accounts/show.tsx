@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { DashboardCard } from "@/components/ui/dashboard-card";
 import {
     Dialog,
     DialogContent,
@@ -22,7 +23,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { Account, AccountType } from '@/types/account';
@@ -63,7 +63,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
             onError: (errors: Record<string, string>) => {
                 toast.error(
                     errors.error ||
-                        'Cannot delete account because it has child accounts attached.',
+                    'Cannot delete account because it has child accounts attached.',
                 );
                 setIsDeleteDialogOpen(false);
                 setIsDeleting(false);
@@ -95,7 +95,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                 title={`${account.code} - ${account.name} | Account Details`}
             />
 
-            <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-6">
+            <div className="flex flex-col gap-6 p-6">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div className="flex items-center gap-4">
                         <Button
@@ -276,7 +276,7 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                             </div>
 
                             {!account.children ||
-                            account.children.length === 0 ? (
+                                account.children.length === 0 ? (
                                 <p className="text-sm text-muted-foreground italic">
                                     No sub-accounts exist under this account
                                     node.

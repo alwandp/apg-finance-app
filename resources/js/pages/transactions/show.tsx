@@ -47,8 +47,8 @@ export default function TransactionsShow({
         >
             <Head title={`Journal Entry #${transaction.id}`} />
 
-            <div className="mx-auto max-w-5xl space-y-6 p-6">
-                <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-6 p-6">
+                <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
                         <div className="flex items-center gap-2">
                             <h1 className="text-2xl font-bold tracking-tight text-foreground">
