@@ -11,7 +11,7 @@ import {
 import React, { useMemo } from 'react';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, getEntryColorClass } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { AccountType } from '@/types/account';
 import type { TrialBalanceEntry } from '@/types/transaction';
@@ -257,10 +257,10 @@ export default function TrialBalancePage({ entries = [] }: TrialBalanceProps) {
                                                                     }
                                                                 </span>
                                                             </td>
-                                                            <td className="p-4 text-right font-mono text-emerald-600 dark:text-emerald-400">
+                                                            <td className={`p-4 text-right font-mono ${getEntryColorClass('debit', entry.account_type)}`}>
                                                                 {formatCurrency(d)}
                                                             </td>
-                                                            <td className="p-4 text-right font-mono text-rose-600 dark:text-rose-400">
+                                                            <td className={`p-4 text-right font-mono ${getEntryColorClass('credit', entry.account_type)}`}>
                                                                 {formatCurrency(c)}
                                                             </td>
                                                             <td className="p-4 text-right font-mono font-semibold text-foreground">

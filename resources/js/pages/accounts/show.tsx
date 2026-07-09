@@ -24,7 +24,7 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import AppLayout from '@/layouts/app-layout';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, getEntryBadgeClass, getEntryColorClass, getEntrySign } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Account, AccountType } from '@/types/account';
 
@@ -278,7 +278,6 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                         <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                                             {transactionDetails.map((detail) => {
                                                 const tx = detail.transaction;
-                                                const isDebit = detail.type === 'debit';
 
                                                 return (
                                                     <tr
@@ -311,21 +310,15 @@ export default function AccountsShow({ account }: AccountsShowProps) {
                                                         </td>
                                                         <td className="p-3">
                                                             <span
-                                                                className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${isDebit
-                                                                        ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400'
-                                                                        : 'bg-rose-500/10 text-rose-600 dark:bg-rose-500/20 dark:text-rose-400'
-                                                                    }`}
+                                                                className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${getEntryBadgeClass(detail.type, account.type)}`}
                                                             >
                                                                 {detail.type}
                                                             </span>
                                                         </td>
                                                         <td
-                                                            className={`p-3 text-right font-mono font-semibold ${isDebit
-                                                                    ? 'text-emerald-600 dark:text-emerald-400'
-                                                                    : 'text-rose-600 dark:text-rose-400'
-                                                                }`}
+                                                            className={`p-3 text-right font-mono font-semibold ${getEntryColorClass(detail.type, account.type)}`}
                                                         >
-                                                            {isDebit ? '+' : '-'}{formatCurrency(detail.amount)}
+                                                            {getEntrySign(detail.type, account.type)}{formatCurrency(detail.amount)}
                                                         </td>
                                                     </tr>
                                                 );

@@ -24,7 +24,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, getEntryColorClass } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Account, AccountType } from '@/types/account';
 import type { TransactionEntryType } from '@/types/transaction';
@@ -225,6 +225,9 @@ export default function TransactionsCreate({
                                     const amountError = (errors as any)[
                                         `details.${idx}.amount`
                                     ];
+                                    const selectedAccount = accounts.find(
+                                        (a) => a.id === row.account_id
+                                    );
 
                                     return (
                                         <div
@@ -336,13 +339,13 @@ export default function TransactionsCreate({
                                                     <SelectContent>
                                                         <SelectItem
                                                             value="debit"
-                                                            className="font-medium text-emerald-600"
+                                                            className={`font-medium ${getEntryColorClass('debit', selectedAccount?.type)}`}
                                                         >
                                                             Debit
                                                         </SelectItem>
                                                         <SelectItem
                                                             value="credit"
-                                                            className="font-medium text-rose-600"
+                                                            className={`font-medium ${getEntryColorClass('credit', selectedAccount?.type)}`}
                                                         >
                                                             Credit
                                                         </SelectItem>

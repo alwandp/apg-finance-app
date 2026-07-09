@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, getEntryColorClass } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
 
@@ -136,12 +136,12 @@ export default function TransactionsShow({
                                                     {item.account?.name ||
                                                         'Unknown Account'}
                                                 </td>
-                                                <td className="p-4 text-right font-mono font-semibold text-emerald-600 dark:text-emerald-400">
+                                                <td className={`p-4 text-right font-mono font-semibold ${getEntryColorClass('debit', item.account?.type)}`}>
                                                     {isDebit
                                                         ? formatCurrency(amt)
                                                         : '—'}
                                                 </td>
-                                                <td className="p-4 text-right font-mono font-semibold text-rose-600 dark:text-rose-400">
+                                                <td className={`p-4 text-right font-mono font-semibold ${getEntryColorClass('credit', item.account?.type)}`}>
                                                     {!isDebit
                                                         ? formatCurrency(amt)
                                                         : '—'}
