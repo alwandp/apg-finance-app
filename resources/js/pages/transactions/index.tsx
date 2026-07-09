@@ -179,7 +179,7 @@ export default function TransactionsIndex({
                                 value={accountId}
                                 onValueChange={setAccountId}
                             >
-                                <SelectTrigger className="h-9 bg-white text-sm dark:bg-slate-900">
+                                <SelectTrigger className="h-9 bg-white text-sm dark:bg-slate-900 mb-0!">
                                     <SelectValue placeholder="All Accounts" />
                                 </SelectTrigger>
                                 <SelectContent>
