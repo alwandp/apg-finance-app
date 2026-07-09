@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
-import { formatCurrency, getEntryColorClass } from '@/lib/utils';
+import { formatCurrency, formatDateTime, getEntryColorClass } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
 
@@ -86,7 +86,7 @@ export default function TransactionsShow({
                                 Date
                             </div>
                             <div className="font-mono text-lg font-bold text-foreground">
-                                {transaction.date}
+                                {formatDateTime(transaction.created_at)}
                             </div>
                         </div>
                         <div className="space-y-1">

@@ -14,7 +14,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { DashboardCard } from "@/components/ui/dashboard-card";
 import AppLayout from '@/layouts/app-layout';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, formatDateTime } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Transaction } from '@/types/transaction';
 
@@ -297,7 +297,7 @@ export default function Dashboard({
                                                 <td className="p-4 font-mono text-xs whitespace-nowrap">
                                                     <div className="flex items-center gap-1.5">
                                                         <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
-                                                        <span>{tx.date}</span>
+                                                        <span>{formatDateTime(tx.created_at)}</span>
                                                     </div>
                                                 </td>
                                                 <td className="p-4 font-medium text-foreground">

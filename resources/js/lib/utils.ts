@@ -98,3 +98,41 @@ export function getEntrySign(
     return entryType === 'credit' ? '+' : '-';
 }
 
+/**
+ * Formats a date string into a human-readable Indonesian locale date.
+ * Example: "2026-07-09" → "9 Jul 2026"
+ */
+export function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+        return dateString;
+    }
+
+    return date.toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+}
+
+/**
+ * Formats a datetime string into a human-readable Indonesian locale date with time.
+ * Example: "2026-07-09T01:20:00Z" → "9 Jul 2026, 08:20 WIB"
+ */
+export function formatDateTime(dateString: string): string {
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+        return dateString;
+    }
+
+    return date.toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short',
+    });
+}

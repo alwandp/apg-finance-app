@@ -125,7 +125,7 @@ const AccountTreeItem: React.FC<{
                         </span>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-12">
                         <Badge
                             variant="outline"
                             className={getTypeBadgeStyles(account.type)}
