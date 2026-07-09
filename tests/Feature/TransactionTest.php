@@ -58,7 +58,7 @@ test('balanced transaction entry can be created', function () {
     ]);
 });
 
-test('unbalanced transaction entry fails validation with equilibrium error', function () {
+test('unbalanced transaction entry can be created successfully', function () {
     $debitAccount = Account::factory()->create(['is_active' => true]);
     $creditAccount = Account::factory()->create(['is_active' => true]);
 
@@ -79,8 +79,10 @@ test('unbalanced transaction entry fails validation with equilibrium error', fun
         ],
     ]);
 
-    $response->assertSessionHasErrors(['details' => 'Total debits must equal total credits.']);
-    $this->assertDatabaseCount('transactions', 0);
+    $response->assertRedirect(route('transactions.index'));
+    $response->assertSessionHasNoErrors();
+    $this->assertDatabaseCount('transactions', 1);
+    $this->assertDatabaseCount('transaction_details', 2);
 });
 
 test('transaction referencing inactive account fails validation', function () {

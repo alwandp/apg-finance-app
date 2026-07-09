@@ -4,7 +4,6 @@ import {
     Plus,
     Trash2,
     CheckCircle2,
-    AlertCircle,
     Save,
 } from 'lucide-react';
 import type { FormEventHandler } from 'react';
@@ -118,12 +117,6 @@ export default function TransactionsCreate({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
-        if (!isBalanced) {
-            toast.error('Total debits must equal total credits before saving.');
-
-            return;
-        }
 
         post('/transactions', {
             onSuccess: () => {
@@ -408,28 +401,19 @@ export default function TransactionsCreate({
                     {/* Live Balance Summary Panel */}
                     <DashboardCard
 
-                        className={`p-5 transition-colors duration-300 ${isBalanced
-                            ? 'border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-950/20'
-                            : 'border-rose-500/40 bg-rose-500/10 dark:bg-rose-950/20'
-                            }`}
+                        className={`p-5 transition-colors duration-300 border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-950/20`}
                     >
                         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                             <div className="flex items-center gap-3">
-                                {isBalanced ? (
-                                    <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" />
-                                ) : (
-                                    <AlertCircle className="h-6 w-6 shrink-0 text-rose-600 dark:text-rose-400" />
-                                )}
+                                <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" />
                                 <div>
                                     <h4 className="font-semibold text-foreground">
-                                        {isBalanced
-                                            ? 'Journal Entry is Balanced'
-                                            : 'Journal Entry Unbalanced'}
+                                        Journal Entry
                                     </h4>
                                     <p className="text-xs text-muted-foreground">
                                         {isBalanced
                                             ? 'Debits and credits equal precisely.'
-                                            : `Debits must equal credits. Current variance: ${formatCurrency(difference)}`}
+                                            : `Debits and credits variance: ${formatCurrency(difference)}`}
                                     </p>
                                 </div>
                             </div>
